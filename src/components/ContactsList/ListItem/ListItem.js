@@ -22,7 +22,7 @@ export const ListItem = ({ giveContact:{ id, name, number }, giveDeleteContact }
 
 ListItem.propTypes = {
   giveDeleteContact: PropTypes.func.isRequired,
-  giveContacts: PropTypes.arrayOf(
+  giveContact: PropTypes.arrayOf(
     PropTypes.exact({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
