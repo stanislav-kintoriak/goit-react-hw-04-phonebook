@@ -1,0 +1,20 @@
+.divSection {
+    padding-top: 30px;
+    padding-left: 30px;
+}
+
+
+.section__title {
+    font-size: 22px;
+    font-weight: 500;
+    color: #000000;
+    margin-bottom: 30px;
+}
+
+.contacts__title {
+    font-size: 22px;
+    font-weight: 500;
+    color: #000000;
+    margin-bottom: 30px;
+}
+

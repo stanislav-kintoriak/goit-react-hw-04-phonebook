@@ -1,0 +1,19 @@
+.contact__list div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 500px;
+}
+
+.contact__list p {
+  color: #000000;
+  font-size: 22px;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.contact__list span {
+  color: #000000;
+  font-weight: 500;
+  margin-left: 10px;
+}
