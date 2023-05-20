@@ -81,7 +81,7 @@ useEffect(()=> {
 
   const deleteContact = contactId => {
     setContacts(prevState => 
-  prevState.contacts.filter(contact => contact.id !== contactId),
+  prevState.filter(contact => contact.id !== contactId),
     );
   };
 
