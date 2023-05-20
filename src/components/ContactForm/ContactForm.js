@@ -1,33 +1,49 @@
-import React, { Component } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import css from './ContactForm.module.css';
 
-export class ContactForm extends Component {
-  state = {
-    name: '',
-    number: '',
-  };
+export const ContactForm = ({onFormSubmit}) => {
 
-  handleChange = e => {
+const [name,setName] = useState('')
+const [number,setNumber] = useState('')
+
+
+
+const handleChange = e => {
     const { name, value } = e.currentTarget;
-    this.setState({ [name]: value });
+   
+switch(name){
+
+case 'name':
+  setName(value);
+brake;
+case 'number':
+  setNumber(value);
+brake;
+
+default: return;
+}
+};
+
+const  stateReset = () => {
+  setName('');
+  serNumber('');
   };
 
-  stateReset = () => {
-    this.setState({ name: '', number: '' });
-  };
 
-  handleSubmit = e => {
+
+
+const handleSubmit = e => {
     e.preventDefault();
 
-    this.props.onFormSubmit(this.state);
+onFormSubmit({name,number});
 
-    this.stateReset();
+stateReset();
   };
 
   render() {
     return (
-      <form className={css.form} onSubmit={this.handleSubmit}>
+      <form className={css.form} onSubmit={handleSubmit}>
         <label htmlFor="form-name">Name</label>
         <input
           type="text"
@@ -35,8 +51,8 @@ export class ContactForm extends Component {
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           id="form-name"
-          onChange={this.handleChange}
-          value={this.state.name}
+          onChange={handleChange}
+          value={name}
           required
         />
         <label htmlFor="form-number">Number</label>
@@ -46,8 +62,8 @@ export class ContactForm extends Component {
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           id="form-number"
-          onChange={this.handleChange}
-          value={this.state.number}
+          onChange={handleChange}
+          value={number}
           required
         />
         <button type="submit" className={css.form__button}>
