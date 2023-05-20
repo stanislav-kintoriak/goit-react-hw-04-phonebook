@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import  { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import { ContactForm } from './ContactForm/ContactForm'
 import { Filter } from './Filter/Filter'
@@ -7,18 +7,29 @@ import { ContactList } from './ContactsList/ContactsList'
 import css from './App.module.css'
 
 
-export class App extends Component {
+export const  App =() => {
 
-  state = {
-    contacts: [],
-    filter: '',
-}
+const [contacts,setContacts] = useState(()=>{
+  return JSON.parse(localStorage.getItem('contacts'))??'';
+});
 
 
-  formSubmitHandler = ({ name, number }) => {
+const [filter,setFilter] = useState('');
+
+
+useEffect(()=> {
+  localStorage.setItem('contacts', JSON.stringify(contacts))
+},
+  [contacts])
+
+
+
+
+
+  const formSubmitHandler = ({ name, number }) => {
     const generatedId = nanoid();
 
-    const contactsFromState = this.state.contacts;
+    const contactsFromState = contacts;
 
     const contact = { id: generatedId, name, number };
 
@@ -27,32 +38,34 @@ export class App extends Component {
       return;
     }
 
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, contact],
-    }));
+   setContacts(prevState => [...prevState,contact]);
   }
 
 
-  componentDidMount() {
-    const localStorageItems = JSON.parse(localStorage.getItem('contacts'));
-    if (localStorageItems) {
-      this.setState({
-        contacts: localStorageItems,
-      });
-    }
-  }
-  componentDidUpdate(_, prevState) {
-    const contacts = JSON.stringify(this.state.contacts);
+  // componentDidMount() {
+  //   const localStorageItems = JSON.parse(localStorage.getItem('contacts'));
+  //   if (localStorageItems) {
+  //     this.setState({
+  //       contacts: localStorageItems,
+  //     });
+  //   }
+  // }
+  // componentDidUpdate(_, prevState) {
+  //   const contacts = JSON.stringify(this.state.contacts);
 
-    if (this.state.contacts !== prevState.contacts) {
-      localStorage.setItem('contacts', contacts);
-    }
-  }
+  //   if (this.state.contacts !== prevState.contacts) {
+  //     localStorage.setItem('contacts', contacts);
+  //   }
+  // }
 
   filterChangeHandler = e => {
-    this.setState({ filter: e.currentTarget.value });
+    setFilter(e.currentTarget.value );
   };
 
+
+
+
+  
   getSearchContacts = () => {
     const { contacts, filter } = this.state;
 
