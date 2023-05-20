@@ -10,7 +10,7 @@ import css from './App.module.css'
 export const  App =() => {
 
 const [contacts,setContacts] = useState(()=>{
-  return JSON.parse(localStorage.getItem('contacts'))??'';
+  return JSON.parse(localStorage.getItem('contacts'))??[];
 });
 
 
@@ -58,16 +58,19 @@ useEffect(()=> {
   //   }
   // }
 
-  filterChangeHandler = e => {
+  const filterChangeHandler = e => {
     setFilter(e.currentTarget.value );
   };
 
 
 
 
+
+
+
   
-  getSearchContacts = () => {
-    const { contacts, filter } = this.state;
+ const getSearchContacts = () => {
+
 
     const filterInLowerCase = filter.toLowerCase();
 
@@ -76,29 +79,27 @@ useEffect(()=> {
     );
   };
 
-  deleteContact = contactId => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
-    }));
+  const deleteContact = contactId => {
+    setContacts(prevState => 
+  prevState.contacts.filter(contact => contact.id !== contactId),
+    );
   };
 
 
 
-render () {
-  const { filter } = this.state;
 
-  const foundContacts = this.getSearchContacts();
+
+  const foundContacts = getSearchContacts();
 
   return (<div className={css.divSection}>
         <h1 className={css.section__title}>Phonebook</h1>
-        <ContactForm onFormSubmit={this.formSubmitHandler} />
+        <ContactForm onFormSubmit={formSubmitHandler} />
         <h2 className={css.contacts__title}>Contacts</h2>
-        <Filter filterValue={filter} filterChange={this.filterChangeHandler} />
+        <Filter filterValue={filter} filterChange={filterChangeHandler} />
         <ContactList
           renderList={foundContacts}
-          onDeleteContact={this.deleteContact}
+          onDeleteContact={deleteContact}
         />
       </div>
   );
-}
 }

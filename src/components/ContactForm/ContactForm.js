@@ -16,10 +16,10 @@ switch(name){
 
 case 'name':
   setName(value);
-brake;
+break;
 case 'number':
   setNumber(value);
-brake;
+break;
 
 default: return;
 }
@@ -27,7 +27,7 @@ default: return;
 
 const  stateReset = () => {
   setName('');
-  serNumber('');
+  setNumber('');
   };
 
 
@@ -41,7 +41,7 @@ onFormSubmit({name,number});
 stateReset();
   };
 
-  render() {
+
     return (
       <form className={css.form} onSubmit={handleSubmit}>
         <label htmlFor="form-name">Name</label>
@@ -72,7 +72,7 @@ stateReset();
       </form>
     );
   }
-}
+
 
 ContactForm.propTypes = {
   onFormSubmit: PropTypes.func.isRequired,
